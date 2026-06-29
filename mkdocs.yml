@@ -1,0 +1,38 @@
+site_name: Qwen3.5 Fine-Tuning
+site_description: Documentacao do projeto de fine-tuning Qwen3.5 com gerador de contexto.
+
+theme:
+  name: mkdocs
+  language: pt-BR
+  navigation_depth: 3
+
+nav:
+  - Inicio: index.md
+  - Primeiros Passos:
+      - Visao geral: primeiros-passos/visao-geral.md
+      - Instalacao: primeiros-passos/instalacao.md
+      - Estrutura do projeto: primeiros-passos/estrutura.md
+  - Gerador de Contexto:
+      - Como funciona: contexto/como-funciona.md
+      - Interface grafica: contexto/interface-grafica.md
+      - Gerar contexto: contexto/gerar-contexto.md
+      - Prompt com contexto: contexto/prompt-com-contexto.md
+  - Fine-Tuning:
+      - Dataset: fine-tuning/dataset.md
+      - Treinamento: fine-tuning/treinamento.md
+      - Inferencia: fine-tuning/inferencia.md
+      - Merge LoRA: fine-tuning/merge-lora.md
+  - Operacao:
+      - Fluxo recomendado: operacao/fluxo-recomendado.md
+      - Contexto vs Fine-tuning: operacao/contexto-vs-finetuning.md
+      - Troubleshooting: operacao/troubleshooting.md
+      - Comandos rapidos: operacao/comandos-rapidos.md
+      - Checklist: operacao/checklist.md
+      - Proximos passos: operacao/proximos-passos.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code

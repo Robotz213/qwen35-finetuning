@@ -1,0 +1,21 @@
+source_dir: context/sources
+output_dir: outputs/context
+
+chunk_size: 1800
+chunk_overlap: 250
+max_rows_per_sheet: 5000
+
+include_extensions:
+  - .pdf
+  - .docx
+  - .txt
+  - .md
+  - .csv
+  - .tsv
+  - .xlsx
+  - .xls
+  - .json
+  - .jsonl
+
+context_title: Base de conhecimento
+default_instruction: Use este contexto como fonte de referencia. Quando a resposta depender dele, preserve nomes, numeros, datas e termos exatamente como aparecem.
