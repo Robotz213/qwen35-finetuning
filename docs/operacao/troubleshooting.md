@@ -36,6 +36,16 @@ Tente:
 - aumentar `gradient_accumulation_steps`;
 - usar QLoRA 4-bit quando possivel.
 
+## Sem placa de video, com 16 GB de RAM
+
+Use a configuracao de CPU:
+
+```powershell
+python scripts/train.py --config configs/train_qwen35_lora_cpu_16gb.yaml
+```
+
+Ela prioriza caber na memoria, nao velocidade. O treino pode levar muitas horas dependendo do tamanho do dataset.
+
 ## O contexto gerado ficou grande demais
 
 Reduza no `configs/context_builder.yaml`:

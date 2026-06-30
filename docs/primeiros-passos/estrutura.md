@@ -4,6 +4,7 @@
 qwen35-finetuning/
   configs/
     context_builder.yaml
+    ollama_model.yaml
     train_qwen35_lora.yaml
     train_qwen35_lora_no_bnb.yaml
   context/
@@ -13,6 +14,8 @@ qwen35-finetuning/
   docs/
   scripts/
     build_context.py
+    build_ollama_model.py
+    ask_ollama_with_context.py
     make_prompt_with_context.py
     train.py
     infer.py
@@ -37,3 +40,4 @@ qwen35-finetuning/
 - `src`: codigo reutilizavel usado pelos scripts.
 - `outputs`: resultados gerados, checkpoints, contextos e prompts.
 - `docs`: documentacao usada pelo MkDocs.
+- `ollama`: Modelfile gerado para criar modelo local no Ollama.

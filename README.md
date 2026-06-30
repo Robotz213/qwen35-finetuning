@@ -4,6 +4,8 @@ Projeto base para fine-tuning de modelos Qwen3.5 com LoRA/QLoRA usando Hugging F
 
 O Qwen3.5 oficial e tratado como modelo multimodal no Hugging Face. Este starter usa `AutoProcessor` e `AutoModelForMultimodalLM`, mas o dataset de exemplo e apenas texto para deixar o primeiro treino simples.
 
+Tambem ha um fluxo para Ollama. Nesse modo, o projeto gera contexto, cria um `Modelfile` e permite perguntar ao modelo local usando os chunks gerados. O Ollama customiza modelos via `Modelfile`; treino real de pesos LoRA continua sendo feito fora do Ollama.
+
 Documentacao completa em MkDocs:
 
 ```powershell
@@ -23,6 +25,9 @@ qwen35-finetuning/
   configs/context_builder.yaml
   context/sources/
   data/sample_train.jsonl
+  configs/ollama_model.yaml
+  scripts/build_ollama_model.py
+  scripts/ask_ollama_with_context.py
   scripts/context_gui.py
   scripts/build_context.py
   scripts/train.py
@@ -121,6 +126,32 @@ Isso cria:
 outputs/context/prompt.md
 ```
 
+## Ollama
+
+Gere o `Modelfile`:
+
+```powershell
+python scripts/build_ollama_model.py --config configs/ollama_model.yaml
+```
+
+Crie o modelo no Ollama:
+
+```powershell
+ollama create qwen-contexto -f ollama/Modelfile
+```
+
+Ou faca as duas coisas de uma vez:
+
+```powershell
+python scripts/build_ollama_model.py --config configs/ollama_model.yaml --create
+```
+
+Depois de gerar contexto, pergunte usando os chunks:
+
+```powershell
+python scripts/ask_ollama_with_context.py --model qwen-contexto --question "Resuma os documentos principais"
+```
+
 ## Treinar
 
 Edite `configs/train_qwen35_lora.yaml` conforme sua GPU e dataset, depois execute:
@@ -136,6 +167,14 @@ No Windows nativo, `bitsandbytes` pode não estar disponível dependendo da sua 
 ```powershell
 python scripts/train.py --config configs/train_qwen35_lora_no_bnb.yaml
 ```
+
+Sem placa de video, com 16 GB de RAM, use a configuracao conservadora de CPU:
+
+```powershell
+python scripts/train.py --config configs/train_qwen35_lora_cpu_16gb.yaml
+```
+
+Treino em CPU pode levar muitas horas. Use essa configuracao para testes pequenos e validacao do pipeline.
 
 Para QLoRA 4-bit, prefira Linux, WSL2 ou um ambiente cloud com CUDA.
 

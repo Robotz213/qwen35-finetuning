@@ -56,6 +56,26 @@ Se necessario, faca login pelo terminal:
 huggingface-cli login
 ```
 
+## Ollama
+
+Instale o Ollama e confirme que o comando esta disponivel:
+
+```powershell
+ollama --version
+```
+
+Baixe o modelo base recomendado para CPU:
+
+```powershell
+ollama pull qwen3:0.6b
+```
+
+Depois voce podera criar o modelo customizado do projeto com:
+
+```powershell
+python scripts/build_ollama_model.py --config configs/ollama_model.yaml --create
+```
+
 ## Rodar a documentacao
 
 ```powershell

@@ -16,3 +16,13 @@ Use fine-tuning quando:
 - voce tem bons exemplos de entrada e saida.
 
 Evite treinar o modelo para memorizar documentos. Isso fica caro, dificil de atualizar e menos confiavel que usar contexto.
+
+## Com Ollama
+
+Quando usar Ollama, pense em tres camadas:
+
+- contexto: documentos processados pelo gerador;
+- Modelfile: comportamento, parametros e exemplos fixos;
+- LoRA adapter: opcional e avancado, apenas se ja tiver um adapter compativel.
+
+Para uso local em CPU, contexto + Modelfile costuma ser a melhor combinacao.

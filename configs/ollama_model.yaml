@@ -1,0 +1,26 @@
+model_name: qwen-contexto
+base_model: qwen3:0.6b
+output_modelfile: ollama/Modelfile
+
+parameters:
+  temperature: 0.3
+  top_p: 0.9
+  top_k: 40
+  repeat_penalty: 1.1
+  num_ctx: 4096
+
+system_prompt: |
+  Voce e um assistente tecnico e objetivo.
+  Responda em portugues do Brasil.
+  Quando receber contexto, use-o como fonte principal.
+  Se a informacao nao estiver no contexto fornecido, diga claramente que nao encontrou essa informacao.
+  Preserve nomes, numeros, datas, valores e termos tecnicos exatamente como aparecem no contexto.
+
+messages:
+  - role: user
+    content: "Como devo responder quando o contexto nao traz a informacao?"
+  - role: assistant
+    content: "Informe claramente que a resposta nao foi encontrada no contexto fornecido e evite inventar detalhes."
+
+# Opcional: use apenas se voce ja tiver um adapter LoRA compativel com o modelo base.
+# adapter_path: outputs/meu-adapter.gguf

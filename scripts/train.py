@@ -40,6 +40,17 @@ def build_quantization_config(config: dict) -> BitsAndBytesConfig | None:
     )
 
 
+def resolve_torch_dtype(config: dict) -> torch.dtype:
+    dtype_name = config.get("torch_dtype")
+    if dtype_name:
+        return getattr(torch, dtype_name)
+    if config.get("bf16", False):
+        return torch.bfloat16
+    if config.get("fp16", False):
+        return torch.float16
+    return torch.float32
+
+
 def main() -> None:
     args = parse_args()
     config = load_config(args.config)
@@ -57,12 +68,16 @@ def main() -> None:
     dataset = dataset.map(validate_messages)
 
     quantization_config = build_quantization_config(config)
+    device_map = config.get("device_map", "auto")
+    if device_map in {"none", "null"}:
+        device_map = None
+
     model = AutoModelForMultimodalLM.from_pretrained(
         model_name,
         quantization_config=quantization_config,
-        device_map="auto",
+        device_map=device_map,
         trust_remote_code=True,
-        torch_dtype=torch.bfloat16 if config.get("bf16", True) else torch.float16,
+        torch_dtype=resolve_torch_dtype(config),
     )
 
     if config.get("gradient_checkpointing", True):
@@ -83,6 +98,7 @@ def main() -> None:
         packing=config.get("packing", False),
         assistant_only_loss=config.get("assistant_only_loss", False),
         num_train_epochs=config.get("num_train_epochs", 1),
+        max_steps=config.get("max_steps", -1),
         per_device_train_batch_size=config.get("per_device_train_batch_size", 1),
         gradient_accumulation_steps=config.get("gradient_accumulation_steps", 8),
         learning_rate=config.get("learning_rate", 2e-4),

@@ -17,6 +17,10 @@ nav:
       - Interface grafica: contexto/interface-grafica.md
       - Gerar contexto: contexto/gerar-contexto.md
       - Prompt com contexto: contexto/prompt-com-contexto.md
+  - Ollama:
+      - Fluxo com Ollama: ollama/fluxo-com-ollama.md
+      - Criar modelo customizado: ollama/criar-modelo.md
+      - Perguntar com contexto: ollama/perguntar-com-contexto.md
   - Fine-Tuning:
       - Dataset: fine-tuning/dataset.md
       - Treinamento: fine-tuning/treinamento.md

@@ -42,6 +42,24 @@ Criar prompt com contexto:
 python scripts/make_prompt_with_context.py --question "Minha pergunta aqui"
 ```
 
+Gerar Modelfile para Ollama:
+
+```powershell
+python scripts/build_ollama_model.py --config configs/ollama_model.yaml
+```
+
+Criar modelo no Ollama:
+
+```powershell
+ollama create qwen-contexto -f ollama/Modelfile
+```
+
+Perguntar ao Ollama usando contexto:
+
+```powershell
+python scripts/ask_ollama_with_context.py --model qwen-contexto --question "Minha pergunta aqui"
+```
+
 Treinar:
 
 ```powershell
@@ -52,6 +70,12 @@ Treinar sem bitsandbytes:
 
 ```powershell
 python scripts/train.py --config configs/train_qwen35_lora_no_bnb.yaml
+```
+
+Treinar em CPU com 16 GB de RAM:
+
+```powershell
+python scripts/train.py --config configs/train_qwen35_lora_cpu_16gb.yaml
 ```
 
 Inferir:

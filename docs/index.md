@@ -1,14 +1,14 @@
 # Qwen3.5 Fine-Tuning
 
-Documentacao do projeto para fine-tuning de modelos Qwen3.5 com LoRA/QLoRA e geracao de contexto a partir de PDFs, planilhas, documentos Word, textos e JSON.
+Documentacao do projeto para uso local com Ollama, geracao de contexto a partir de PDFs, planilhas, documentos Word, textos e JSON, e fine-tuning LoRA/QLoRA quando houver ambiente adequado.
 
 ## O que este projeto faz
 
 1. Cria uma base de contexto a partir de arquivos comuns.
 2. Monta prompts com os trechos mais relevantes dessa base.
-3. Prepara datasets conversacionais para fine-tuning.
-4. Treina adaptadores LoRA/QLoRA.
-5. Testa e exporta o modelo ajustado.
+3. Gera um `Modelfile` para criar modelo customizado no Ollama.
+4. Pergunta ao Ollama usando contexto local.
+5. Opcionalmente prepara datasets e treina adaptadores LoRA/QLoRA fora do Ollama.
 
 ## Como rodar a documentacao
 
@@ -33,3 +33,5 @@ Para gerar contexto, use um destes caminhos:
 
 - [Interface grafica](contexto/interface-grafica.md): melhor para selecionar arquivos, ajustar parametros e gerar prompts visualmente.
 - [Gerar contexto pelo CLI](contexto/gerar-contexto.md): melhor para automacao e scripts.
+
+Para usar localmente com Ollama, siga [Fluxo com Ollama](ollama/fluxo-com-ollama.md).
